@@ -1,6 +1,6 @@
 import os
 
-#os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 import math
 import numpy as np
 # from numpy import *
@@ -241,22 +241,23 @@ def get_im_train(path_im, path_save_im):
         for j in range(int(len(list_dir1))):
             path_to_files=path_im + '/' +  list_dir[i] + '/' + list_dir1[j]
             list_dir2 = os.listdir(path_to_files)
+            print(list_dir2)
 
             for k in range(int(len(list_dir2))):
                 path_to_files1 = path_im + '/' + list_dir[i] + '/' + list_dir1[j] + '/' + list_dir2[k]
                 list_dir3 = os.listdir(path_to_files1)
                 list_dir_save2 = path_save_im + '/' +  list_dir[i] + '/' + list_dir2[k]
+                print(path_to_files1)
 
                 if not os.path.exists(list_dir_save2):
                     os.makedirs(list_dir_save2)
                 for im in sorted(list_dir3):
 
                     imag = os.path.join(path_to_files1, im)
-                    print(imag)
                     imag1 = os.path.join(list_dir_save2, im)
                     img = cv2.cvtColor(cv2.imread(imag), cv2.COLOR_RGB2BGR)
                     img = roi_seg(img)
-                   #y, x = img.shape[:2]
+                    #y, x = img.shape[:2]
                     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 
                     y, x = img.shape[:2]
@@ -285,8 +286,8 @@ def get_im_train(path_im, path_save_im):
                     count += 1
                     print(count)
 
-path_im = 'E:/F013'
-path_save_im = 'E:/F013'
+path_im = '/home/ouzar1/Desktop/signal_test'
+path_save_im = '/home/ouzar1/Desktop/ROI'
 
 print("begin1")
 get_im_train(path_im, path_save_im)
